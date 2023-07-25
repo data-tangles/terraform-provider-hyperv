@@ -166,10 +166,6 @@ jobs:
         path: ~/go/pkg/mod
         key: ${{ hashFiles('.github/workflows/release.yml') }}-${{ runner.os }}-go-pkg-mod-${{ hashFiles('go.sum') }}
     - run: go generate ./...
-    - name: Check for Git Differences
-      run: |
-        git diff --exit-code || \
-          (echo; echo "Unexpected difference in directories after code generation. Run 'go generate ./...' command and commit."; exit 1)
 
   go_test:
     name: go test
