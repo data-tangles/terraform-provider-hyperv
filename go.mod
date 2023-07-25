@@ -1,6 +1,6 @@
 module github.com/qman-being/terraform-provider-hyperv
 
-go 1.19
+go 1.20.6
 
 require (
 	github.com/dylanmei/iso8601 v0.1.0
