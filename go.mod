@@ -1,4 +1,4 @@
-module github.com/taliesins/terraform-provider-hyperv
+module github.com/qman-being/terraform-provider-hyperv
 
 go 1.19
 
