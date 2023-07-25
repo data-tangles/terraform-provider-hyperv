@@ -16,8 +16,8 @@ Get information about existing vhd/vhdx/vhds.
 terraform {
   required_providers {
     hyperv = {
-      source  = "taliesins/hyperv"
-      version = ">= 1.0.3"
+      source  = "qman-being/hyperv"
+      version = ">= 1.0.0"
     }
   }
 }
@@ -78,3 +78,5 @@ output "hyperv_vhd" {
 Optional:
 
 - `read` (String)
+
+

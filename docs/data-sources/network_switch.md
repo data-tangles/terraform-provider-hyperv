@@ -16,8 +16,8 @@ Get information about existing virtual network switches.
 terraform {
   required_providers {
     hyperv = {
-      source  = "taliesins/hyperv"
-      version = ">= 1.0.3"
+      source  = "qman-being/hyperv"
+      version = ">= 1.0.0"
     }
   }
 }
@@ -85,3 +85,5 @@ output "hyperv_network_switch" {
 Optional:
 
 - `read` (String)
+
+
