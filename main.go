@@ -39,7 +39,7 @@ func main() {
 	opts := &plugin.ServeOpts{
 		Debug: debugMode,
 
-		ProviderAddr: "registry.terraform.io/taliesins/hyperv",
+		ProviderAddr: "registry.terraform.io/qman-being/hyperv",
 
 		ProviderFunc: provider.New(version, commit),
 	}
