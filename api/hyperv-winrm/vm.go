@@ -5,7 +5,7 @@ import (
 	"encoding/json"
 	"text/template"
 
-	"github.com/taliesins/terraform-provider-hyperv/api"
+	"github.com/qman-being/terraform-provider-hyperv/api"
 )
 
 type existsVmArgs struct {

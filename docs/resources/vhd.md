@@ -16,8 +16,8 @@ This Hyper-V resource allows you to manage VHDs.
 terraform {
   required_providers {
     hyperv = {
-      source  = "qman-being/hyperv"
-      version = ">= 1.0.0"
+      source  = "taliesins/hyperv"
+      version = ">= 1.0.3"
     }
   }
 }
@@ -73,5 +73,3 @@ Optional:
 - `delete` (String)
 - `read` (String)
 - `update` (String)
-
-

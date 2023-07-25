@@ -1,8 +1,8 @@
 package hyperv_winrm
 
 import (
-	"github.com/taliesins/terraform-provider-hyperv/api"
-	winrm_helper "github.com/taliesins/terraform-provider-hyperv/api/winrm-helper"
+	"github.com/qman-being/terraform-provider-hyperv/api"
+	winrm_helper "github.com/qman-being/terraform-provider-hyperv/api/winrm-helper"
 )
 
 func New(clientConfig *ClientConfig) (*api.Provider, error) {

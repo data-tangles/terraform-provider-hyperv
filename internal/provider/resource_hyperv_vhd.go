@@ -11,7 +11,7 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
-	"github.com/taliesins/terraform-provider-hyperv/api"
+	"github.com/qman-being/terraform-provider-hyperv/api"
 )
 
 const (

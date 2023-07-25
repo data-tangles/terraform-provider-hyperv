@@ -9,13 +9,13 @@ import (
 	"strings"
 	"time"
 
-	"github.com/taliesins/terraform-provider-hyperv/api"
-	hyperv_winrm "github.com/taliesins/terraform-provider-hyperv/api/hyperv-winrm"
+	"github.com/qman-being/terraform-provider-hyperv/api"
+	hyperv_winrm "github.com/qman-being/terraform-provider-hyperv/api/hyperv-winrm"
 
 	"github.com/dylanmei/iso8601"
 	pool "github.com/jolestar/go-commons-pool/v2"
 	winrm "github.com/masterzen/winrm"
-	winrm_helper "github.com/taliesins/terraform-provider-hyperv/api/winrm-helper"
+	winrm_helper "github.com/qman-being/terraform-provider-hyperv/api/winrm-helper"
 )
 
 type Config struct {

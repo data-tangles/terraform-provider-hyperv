@@ -16,8 +16,8 @@ This Hyper-V resource allows you to manage virtual machine instances.
 terraform {
   required_providers {
     hyperv = {
-      source  = "qman-being/hyperv"
-      version = ">= 1.0.0"
+      source  = "taliesins/hyperv"
+      version = ">= 1.0.3"
     }
   }
 }
@@ -370,5 +370,3 @@ Optional:
 - `maximum_count_per_numa_socket` (Number) Specifies the maximum number of sockets per NUMA node to be configured for the virtual machine.
 - `relative_weight` (Number) Specifies the priority for allocating the physical computer's processing power to this virtual machine relative to others. Allowed values range from 1 to 10000.
 - `reserve` (Number) Specifies the percentage of processor resources to be reserved for this virtual machine. Allowed values range from 0 to 100.
-
-

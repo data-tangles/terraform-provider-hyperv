@@ -11,7 +11,7 @@ import (
 
 	pool "github.com/jolestar/go-commons-pool/v2"
 	"github.com/masterzen/winrm"
-	"github.com/taliesins/terraform-provider-hyperv/powershell"
+	"github.com/qman-being/terraform-provider-hyperv/powershell"
 )
 
 func New(clientConfig *ClientConfig) (*Provider, error) {
