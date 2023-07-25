@@ -49,7 +49,7 @@ Set-WSManInstance WinRM/Config/Service/Auth -ValueSet @{Negotiate = $true}
 ```
 #Create CA certificate
 $rootCaName = "DevRootCA"
-$rootCaPassword = ConvertTo-SecureString "P@ssw0rd" -asplaintext -force 
+$rootCaPassword = ConvertTo-SecureString "P@ssw0rd" -asplaintext -force
 $rootCaCertificate = Get-ChildItem cert:\LocalMachine\Root |?{$_.subject -eq "CN=$rootCaName"}
 if (!$rootCaCertificate){
   Get-ChildItem cert:\LocalMachine\My |?{$_.subject -eq "CN=$rootCaName"} | remove-item -force
@@ -96,7 +96,7 @@ if (!$hostCertificate){
     remove-item .\$hostName.pfx -force
   }
   $dnsNames = @($hostName, "localhost", "127.0.0.1") + [System.Net.Dns]::GetHostByName($env:computerName).AddressList.IpAddressToString
-  
+
   $params = @{
     Type = 'Custom'
     DnsName = $dnsNames
@@ -132,7 +132,7 @@ New-NetFirewallRule -DisplayName "Windows Remote Management (HTTPS-In)" -Name "W
 - WinRM allow HTTP
 ```
 # Get the public networks
-$PubNets = Get-NetConnectionProfile -NetworkCategory Public -ErrorAction SilentlyContinue 
+$PubNets = Get-NetConnectionProfile -NetworkCategory Public -ErrorAction SilentlyContinue
 
 # Set the profile to private
 foreach ($PubNet in $PubNets) {
@@ -235,3 +235,7 @@ To view powershell commands that are sent:
 ```
 set WINRMCP_DEBUG=TRUE
 ```
+Credits
+-------
+
+Thanks to [taliesins](https://github.com/taliesins/terraform-provider-hyperv/commits?author=taliesins) for making this provider and [MarkusRannare](https://github.com/MarkusRannare) for the vSwitch fixes
