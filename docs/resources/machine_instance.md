@@ -16,8 +16,8 @@ This Hyper-V resource allows you to manage virtual machine instances.
 terraform {
   required_providers {
     hyperv = {
-      source  = "taliesins/hyperv"
-      version = ">= 1.0.3"
+      source  = "qman-being/hyperv"
+      version = ">= 1.0.0"
     }
   }
 }
