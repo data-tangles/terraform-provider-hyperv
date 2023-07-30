@@ -87,7 +87,7 @@ function Expand-Downloads {
 
 			$7zPath = Get-7ZipPath
 			if ($7zPath) {
-				$command = """$7zPath"" x ""$($_.FullName)"" -o""$tempPath""" 
+				$command = """$7zPath"" x ""$($_.FullName)"" -o""$tempPath"""
 				& cmd.exe /C $command
 			} else {
 				Add-Type -AssemblyName System.IO.Compression.FileSystem
@@ -113,7 +113,7 @@ function Expand-Downloads {
  				throw "7z.exe needed"
 			}
 			$tempPath = join-path $FolderPath "temp"
-			$command = """$7zPath"" x ""$($_.FullName)"" -o""$tempPath""" 
+			$command = """$7zPath"" x ""$($_.FullName)"" -o""$tempPath"""
 			& cmd.exe /C $command
 
 			if (Test-Path "$tempPath\Virtual Hard Disks") {
@@ -225,7 +225,7 @@ if (!(Test-Path -Path $vhd.Path)) {
         Get-VHD -path $vhd.Path
     } elseif ($source) {
         Push-Location $pathDirectory
-        
+
         if (Test-Uri -Url $source) {
             Get-FileFromUri -Url $source -FolderPath $pathDirectory
         }
@@ -367,12 +367,17 @@ if ($vhdObject){
 `))
 
 func (c *ClientConfig) GetVhd(ctx context.Context, path string) (result api.Vhd, err error) {
-	err = c.WinRmClient.RunScriptWithResult(ctx, getVhdTemplate, getVhdArgs{
-		Path: path,
-	}, &result)
+	for {
+		err = c.WinRmClient.RunScriptWithResult(ctx, getVhdTemplate, getVhdArgs{
+			Path: path,
+		}, &result)
+        if err != nil && strings.Contains(err.Error(), getVHDErrorMessage) {
+          time.Sleep(10 * time.Second)
+          continue
+		}
+		break
+	}
 
-	return result, err
-}
 
 type deleteVhdArgs struct {
 	Path string
@@ -390,10 +395,15 @@ Get-ChildItem -Path $targetDirectory |?{$_.BaseName.StartsWith($targetName)} | %
 }
 `))
 
-func (c *ClientConfig) DeleteVhd(ctx context.Context, path string) (err error) {
-	err = c.WinRmClient.RunFireAndForgetScript(ctx, deleteVhdTemplate, deleteVhdArgs{
-		Path: path,
-	})
-
-	return err
+func (c *ClientConfig) GetVhd(ctx context.Context, path string) (result api.Vhd, err error) {
+	for {
+		err = c.WinRmClient.RunScriptWithResult(ctx, getVhdTemplate, getVhdArgs{
+			Path: path,
+		}, &result)
+        if err != nil && strings.Contains(err.Error(), getVHDErrorMessage) {
+          time.Sleep(30 * time.Second)
+          continue
+        }
+       break
+	}
 }
