@@ -26,8 +26,6 @@ if (Test-Path $path) {
 }
 `))
 
-const getVhdErrorMessage = "your_specific_error_message_here"
-
 func (c *ClientConfig) VhdExists(ctx context.Context, path string) (result api.VhdExists, err error) {
 	err = c.WinRmClient.RunScriptWithResult(ctx, existsVhdTemplate, existsVhdArgs{
 		Path: path,
