@@ -4,6 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"text/template"
+	"time"
 
 	"github.com/qman-being/terraform-provider-hyperv/api"
 )
@@ -24,6 +25,8 @@ if (Test-Path $path) {
 	$exists
 }
 `))
+
+const getVhdErrorMessage = "your_specific_error_message_here"
 
 func (c *ClientConfig) VhdExists(ctx context.Context, path string) (result api.VhdExists, err error) {
 	err = c.WinRmClient.RunScriptWithResult(ctx, existsVhdTemplate, existsVhdArgs{
@@ -371,13 +374,14 @@ func (c *ClientConfig) GetVhd(ctx context.Context, path string) (result api.Vhd,
 		err = c.WinRmClient.RunScriptWithResult(ctx, getVhdTemplate, getVhdArgs{
 			Path: path,
 		}, &result)
-        if err != nil && strings.Contains(err.Error(), getVHDErrorMessage) {
-          time.Sleep(10 * time.Second)
-          continue
+		if err != nil {
+			time.Sleep(60 * time.Second)
+			continue
 		}
 		break
 	}
-
+	return result, err
+}
 
 type deleteVhdArgs struct {
 	Path string
@@ -395,15 +399,10 @@ Get-ChildItem -Path $targetDirectory |?{$_.BaseName.StartsWith($targetName)} | %
 }
 `))
 
-func (c *ClientConfig) GetVhd(ctx context.Context, path string) (result api.Vhd, err error) {
-	for {
-		err = c.WinRmClient.RunScriptWithResult(ctx, getVhdTemplate, getVhdArgs{
-			Path: path,
-		}, &result)
-        if err != nil && strings.Contains(err.Error(), getVHDErrorMessage) {
-          time.Sleep(30 * time.Second)
-          continue
-        }
-       break
-	}
+func (c *ClientConfig) DeleteVhd(ctx context.Context, path string) (err error) {
+	err = c.WinRmClient.RunFireAndForgetScript(ctx, deleteVhdTemplate, deleteVhdArgs{
+		Path: path,
+	})
+
+	return err
 }
